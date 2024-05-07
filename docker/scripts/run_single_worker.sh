@@ -10,7 +10,7 @@
 
 # 最初のモデルのみを使う
 # カンマ区切りの最初だけ
-model_args="--model-path $(echo "$FSCHAT_WORKER_MODEL_PATHS" | cut -d, -f1) --model-name $(echo "$FSCHAT_WORKER_MODEL_NAMES" | cut -d, -f1)"
+model_args="--model-path $(echo "$FSCHAT_WORKER_MODEL_PATHS" | cut -d, -f1) --model-names $(echo "$FSCHAT_WORKER_MODEL_NAMES" | cut -d, -f1)"
 
 python3.9 -m fastchat.serve.model_worker \
   --host "$FSCHAT_WORKER_HOST" \
