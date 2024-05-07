@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  fastchat-controller:
+    container_name: fastchat-controller
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fastchat:latest
+    env_file:
+      - .env
+    volumes:
+      - ./scripts:/app/scripts
+    entrypoint:
+      - "bash"
+      - "/app/scripts/run_controller.sh"
+  fastchat-model-worker:
+    container_name: fastchat-model-worker
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - huggingface:/root/.cache/huggingface
+      - ./scripts:/app/scripts
+    image: fastchat:latest
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    entrypoint:
+      - "bash"
+      - "/app/scripts/run_single_worker.sh"
+  fastchat-api-server:
+    container_name: fastchat-api-server
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: fastchat:latest
+    env_file:
+      - .env
+    ports:
+      - "${FSCHAT_API_PORT:?}:${FSCHAT_API_PORT:?}"
+    volumes:
+      - ./scripts:/app/scripts
+    entrypoint:
+      - "bash"
+      - "/app/scripts/run_api.sh"
+volumes:
+  huggingface:
