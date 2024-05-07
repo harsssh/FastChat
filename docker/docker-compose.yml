@@ -10,7 +10,9 @@ services:
       - .env
     volumes:
       - ./scripts:/app/scripts
-    entrypoint: ["/app/scripts/run_controller.sh"]
+    entrypoint:
+      - "bash"
+      - "/app/scripts/run_controller.sh"
   fastchat-model-worker:
     build:
       context: .
@@ -28,7 +30,9 @@ services:
             - driver: nvidia
               count: all
               capabilities: [gpu]
-    entrypoint: ["/app/scripts/run_workers.sh"]
+    entrypoint:
+      - "bash"
+      - "/app/scripts/run_workers.sh"
   fastchat-api-server:
     build:
       context: .
@@ -40,6 +44,8 @@ services:
       - "${FSCHAT_API_PORT:?}:${FSCHAT_API_PORT:?}"
     volumes:
       - ./scripts:/app/scripts
-    entrypoint: ["/app/scripts/run_api.sh"]
+    entrypoint:
+      - "bash"
+      - "/app/scripts/run_api.sh"
 volumes:
   huggingface:
