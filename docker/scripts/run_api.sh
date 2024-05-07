@@ -5,7 +5,7 @@
 : "${FSCHAT_API_PORT:?}"
 : "${FSCHAT_CONTROLLER_PORT:?}"
 
-python3.9 -m fastchat.serve.api \
+python3.9 -m fastchat.serve.openai_api_server \
   --host "$FSCHAT_API_HOST" \
   --port "$FSCHAT_API_PORT" \
   --controller-address "http://fastchat-controller:$FSCHAT_CONTROLLER_PORT"
