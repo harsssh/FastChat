@@ -3,6 +3,7 @@ version: "3.9"
 services:
   fastchat-controller:
     container_name: fastchat-controller
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
@@ -16,6 +17,7 @@ services:
       - "/app/scripts/run_controller.sh"
   fastchat-model-worker:
     container_name: fastchat-model-worker
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
@@ -37,6 +39,7 @@ services:
       - "/app/scripts/run_workers.sh"
   fastchat-api-server:
     container_name: fastchat-api-server
+    restart: always
     build:
       context: .
       dockerfile: Dockerfile
