@@ -89,7 +89,8 @@ def generate_stream(
     logits_processor = prepare_logits_processor(
         temperature, repetition_penalty, top_p, top_k
     )
-    input_ids = tokenizer(prompt).input_ids
+    # add_special_tokens=False を指定しないと、出力がデタラメになる
+    input_ids = tokenizer(prompt, add_special_tokens=False).input_ids
 
     if model.config.is_encoder_decoder:
         max_src_len = context_len
