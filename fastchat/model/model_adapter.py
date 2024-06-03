@@ -2419,8 +2419,19 @@ class RekaAdapter(BaseModelAdapter):
         return get_conv_template("api_based_default")
 
 
+# TODO: プロンプトを適切に設定する
+class RawAdapter(BaseModelAdapter):
+    def match(self, model_path):
+        cand = ['llm-jp', 'swallow', 'nekomata']
+        return any(c in model_path.lower() for c in cand)
+
+    def get_default_conv_template(self, model_path):
+        return get_conv_template("raw")
+
+
 # Note: the registration order matters.
 # The one registered earlier has a higher matching priority.
+register_model_adapter(RawAdapter)
 register_model_adapter(PeftModelAdapter)
 register_model_adapter(StableVicunaAdapter)
 register_model_adapter(VicunaAdapter)
