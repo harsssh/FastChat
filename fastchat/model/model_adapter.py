@@ -2443,8 +2443,17 @@ class ElyzaAdapter(BaseModelAdapter):
         return get_conv_template("elyza")
 
 
+class Calm2Adapter(BaseModelAdapter):
+    def match(self, model_path: str):
+        return "calm2" in model_path.lower()
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("zero_shot")
+
+
 # Note: the registration order matters.
 # The one registered earlier has a higher matching priority.
+register_model_adapter(Calm2Adapter)
 register_model_adapter(ElyzaAdapter)
 register_model_adapter(LLMJPAdapter)
 register_model_adapter(SwallowAdapter)
