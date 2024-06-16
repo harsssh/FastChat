@@ -2419,8 +2419,35 @@ class RekaAdapter(BaseModelAdapter):
         return get_conv_template("api_based_default")
 
 
+class SwallowAdapter(BaseModelAdapter):
+    def match(self, model_path: str):
+        return "swallow" in model_path.lower()
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("swallow")
+
+
+class LLMJPAdapter(BaseModelAdapter):
+    def match(self, model_path: str):
+        return "llm-jp" in model_path.lower()
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("llm-jp")
+
+
+class ElyzaAdapter(BaseModelAdapter):
+    def match(self, model_path: str):
+        return "elyza" in model_path.lower()
+
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("elyza")
+
+
 # Note: the registration order matters.
 # The one registered earlier has a higher matching priority.
+register_model_adapter(ElyzaAdapter)
+register_model_adapter(LLMJPAdapter)
+register_model_adapter(SwallowAdapter)
 register_model_adapter(PeftModelAdapter)
 register_model_adapter(StableVicunaAdapter)
 register_model_adapter(VicunaAdapter)

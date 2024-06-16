@@ -1802,6 +1802,31 @@ register_conv_template(
     )
 )
 
+register_conv_template(
+    Conversation(
+        name="swallow",
+        system_message="以下に、あるタスクを説明する指示があります。リクエストを適切に完了するための回答を記述してください。",
+        roles=("user", "assistant"),
+    )
+)
+
+register_conv_template(
+    Conversation(
+        name="elyza",
+        system_message="あなたは誠実で優秀な日本人のアシスタントです。",
+        roles=("user", "assistant"),
+    )
+)
+
+
+register_conv_template(
+    Conversation(
+        name="llm-jp",
+        system_message="以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。",
+        roles=("user", "assistant"),
+    )
+)
+
 
 if __name__ == "__main__":
     from fastchat.conversation import get_conv_template
