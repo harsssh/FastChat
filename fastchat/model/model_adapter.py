@@ -2448,7 +2448,7 @@ class Calm2Adapter(BaseModelAdapter):
         return "calm2" in model_path.lower()
 
     def get_default_conv_template(self, model_path: str) -> Conversation:
-        return get_conv_template("zero_shot")
+        return get_conv_template("calm2")
 
 
 # Note: the registration order matters.

@@ -1605,7 +1605,7 @@ register_conv_template(
     Conversation(
         name="metharme",
         system_template="<|system|>{system_message}",
-        system_message="""Enter RP mode. You shall reply to the user while staying 
+        system_message="""Enter RP mode. You shall reply to the user while staying
         in character. Your responses must be detailed, creative, immersive, and drive the scenario
         forward.""",
         roles=("<|user|>", "<|model|>"),
@@ -1823,6 +1823,16 @@ register_conv_template(
     Conversation(
         name="llm-jp",
         system_message="以下は、タスクを説明する指示です。要求を適切に満たす応答を書きなさい。",
+        roles=("user", "assistant"),
+    )
+)
+
+
+register_conv_template(
+    Conversation(
+        name="calm2",
+        system_message="A chat between a curious human and an artificial intelligence assistant. "
+        "The assistant gives helpful, detailed, and polite answers to the human's questions.",
         roles=("user", "assistant"),
     )
 )
