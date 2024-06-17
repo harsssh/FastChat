@@ -296,6 +296,9 @@ def get_battle_pair():
     if len(models) == 1:
         return models[0], models[0]
 
+    # NOTE: SAMPLING_WEIGHTS で宣言しないと正しく動作しない不具合を回避
+    return np.random.choice(models, 2, replace=False)
+
     model_weights = []
     for model in models:
         weight = get_sample_weight(model)

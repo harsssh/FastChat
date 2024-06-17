@@ -154,7 +154,11 @@ def oai_moderation(text, custom_thresholds=None):
     """
     import openai
 
-    client = openai.OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    try:
+        client = openai.OpenAI(api_key=os.environ["OPENAI_API_KEY"])
+    except KeyError:
+        print("OPENAI_API_KEY is not set.")
+        return False
 
     # default to true to be conservative
     flagged = True
