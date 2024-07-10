@@ -130,7 +130,7 @@ class BaseModelAdapter:
         )
 
     def get_default_conv_template(self, model_path: str) -> Conversation:
-        return get_conv_template("raw")
+        return get_conv_template("one_shot")
 
 
 # A global registry for all model adapters
@@ -2419,8 +2419,18 @@ class RekaAdapter(BaseModelAdapter):
         return get_conv_template("api_based_default")
 
 
+class RawAdapter(BaseModelAdapter):
+    def match(self, model_path: str):
+        models = ["swallow", "elyza", "calm", "llm-jp"]
+        return any(name in model_path.lower() for name in models)
+    
+    def get_default_conv_template(self, model_path: str) -> Conversation:
+        return get_conv_template("api_based_default") 
+
+
 # Note: the registration order matters.
 # The one registered earlier has a higher matching priority.
+register_model_adapter(RawAdapter)
 register_model_adapter(PeftModelAdapter)
 register_model_adapter(StableVicunaAdapter)
 register_model_adapter(VicunaAdapter)
