@@ -26,7 +26,6 @@ from fastchat.serve.gradio_web_server import (
     set_global_vars,
     block_css,
     build_single_model_ui,
-    build_about,
     get_model_list,
     load_demo_single,
     get_ip,
@@ -59,8 +58,6 @@ def load_demo(url_params, request: gr.Request):
         selected = 3
     elif "leaderboard" in url_params:
         selected = 4
-    elif "about" in url_params:
-        selected = 5
 
     if args.model_list_mode == "reload":
         models, all_models = get_model_list(
@@ -127,14 +124,14 @@ window.__gradio_mode__ = "app";
 
             with gr.Tab("💬 Direct Chat", id=2):
                 single_model_list = build_single_model_ui(
-                    models, add_promotion_links=True
+                    models, add_promotion_links=False
                 )
 
             with gr.Tab("👀 Vision Direct Chat", id=3, visible=args.multimodal):
                 single_vision_language_model_list = (
                     build_single_vision_language_model_ui(
                         vl_models,
-                        add_promotion_links=True,
+                        add_promotion_links=False,
                         random_questions=args.random_questions,
                     )
                 )
@@ -144,9 +141,6 @@ window.__gradio_mode__ = "app";
                     build_leaderboard_tab(
                         elo_results_file, leaderboard_table_file, show_plot=True
                     )
-
-            with gr.Tab("ℹ️  About Us", id=5):
-                about = build_about()
 
         url_params = gr.JSON(visible=False)
 
