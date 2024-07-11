@@ -56,7 +56,7 @@ enable_moderation = False
 use_remote_storage = False
 
 acknowledgment_md = """
-### Terms of Service
+### 利用規約
 
 - 本サイトはLLM-jp 参加者のみ使用することができます。サイトのアドレスやユーザ名・パスワードを LLM-jp 参加者以外に知らせないでください。
 - 本サイトで入力した情報は、LLM-jp における研究開発に利用します。また、LLM 開発のためのデータとして一般公開する可能性があります。秘密情報を漏洩しないよう注意ください。
